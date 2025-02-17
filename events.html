@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Event Ticket Booking</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Upcoming Events</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="location.html">Location</a>
+            
+            <a href="logout.html">Logout</a>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="events-list">
+            <!-- Events will be populated here dynamically -->
+        </section>
+    </main>
+    
+    <script>
+        const events = [
+        { id: 1, name: "Concert Night", date: "2025-03-15", location: "New York City", tickets: 50 },
+        { id: 2, name: "Tech Conference", date: "2025-04-10", location: "San Francisco", tickets: 100 },
+        { id: 3, name: "Comedy Show", date: "2025-05-20", location: "Los Angeles", tickets: 75 },
+        { id: 4, name: "Food Festival", date: "2025-06-10", location: "Chicago", tickets: 200 },
+        { id: 5, name: "Sports Championship", date: "2025-07-05", location: "Miami", tickets: 150 },
+        { id: 6, name: "Art Exhibition", date: "2025-08-12", location: "Seattle", tickets: 80 },
+        { id: 7, name: "Book Fair", date: "2025-09-20", location: "Boston", tickets: 120 }
+        ];
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const eventsList = document.getElementById("events-list");
+            events.forEach(event => {
+                const eventDiv = document.createElement("div");
+                eventDiv.innerHTML = `
+                    <h2>${event.name}</h2>
+                    <p>Date: ${event.date}</p>
+                    <p>Location: ${event.location}</p>
+                    <p>Available Tickets: ${event.tickets}</p>
+                    <button onclick="bookTicket(${event.id})">Book Now</button>
+                `;
+                eventsList.appendChild(eventDiv);
+            });
+        });
+
+        function bookTicket(eventId) {
+            alert(`Booking ticket for event ID: ${eventId}`);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Events by Location</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Find Events by Location</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="location.html">Location</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="logout.html">Logout</a>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="location-search">
+            <h2>Enter Your Location</h2>
+            <input type="text" id="location-input" placeholder="Enter city or venue">
+            <button onclick="findEvents()">Find Events</button>
+        </section>
+        
+        <section id="events-list">
+            <h2>Available Events</h2>
+            <div id="events-container"></div>
+        </section>
+    </main>
+    
+    <script>
+        const events = [
+            { id: 1, name: "Concert Night", date: "2025-03-15", location: "New York City", tickets: 50 },
+            { id: 2, name: "Tech Conference", date: "2025-04-10", location: "San Francisco", tickets: 100 },
+            { id: 3, name: "Comedy Show", date: "2025-05-20", location: "Los Angeles", tickets: 75 },
+            { id: 4, name: "Food Festival", date: "2025-06-10", location: "Chicago", tickets: 200 },
+            { id: 5, name: "Sports Championship", date: "2025-07-05", location: "Miami", tickets: 150 },
+            { id: 6, name: "Art Exhibition", date: "2025-08-12", location: "Seattle", tickets: 80 },
+            { id: 7, name: "Book Fair", date: "2025-09-20", location: "Boston", tickets: 120 }
+        ];
+
+        function findEvents() {
+            const locationInput = document.getElementById("location-input").value.toLowerCase();
+            const eventsContainer = document.getElementById("events-container");
+            eventsContainer.innerHTML = "";
+            
+            const filteredEvents = events.filter(event => event.location.toLowerCase().includes(locationInput));
+            
+            if (filteredEvents.length > 0) {
+                filteredEvents.forEach(event => {
+                    const eventDiv = document.createElement("div");
+                    eventDiv.innerHTML = `
+                        <h3>${event.name}</h3>
+                        <p>Date: ${event.date}</p>
+                        <p>Location: ${event.location}</p>
+                        <p>Available Tickets: ${event.tickets}</p>
+                        <button onclick="bookTicket(${event.id})">Book Now</button>
+                    `;
+                    eventsContainer.appendChild(eventDiv);
+                });
+            } else {
+                eventsContainer.innerHTML = "<p>No events found for this location.</p>";
+            }
+        }
+
+        function bookTicket(eventId) {
+            alert(`Booking ticket for event ID: ${eventId}`);
+        }
+    </script>
+</body>
+</html>
