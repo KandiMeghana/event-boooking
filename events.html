@@ -111,30 +111,20 @@
         
 
         function bookTicket(eventId) {
-            let selectedEvent = events.find(event => event.id === eventId);
-            let quantity = parseInt(document.getElementById(`quantity-${eventId}`).value) || 1;
+            let selectedEvent = events.find(event => event.id == eventId);
         
             if (!selectedEvent) {
                 alert("Event not found.");
                 return;
             }
         
-            if (selectedEvent.tickets < quantity) {
-                alert("Not enough tickets available.");
-                return;
-            }
-        
-            // Reduce ticket count
-            selectedEvent.tickets -= quantity;
-        
-            // Update the available ticket count in the UI
-            document.getElementById(`tickets-${eventId}`).textContent = selectedEvent.tickets;
-        
-            
+            // Store full event details in localStorage
+            localStorage.setItem("selectedEvent", JSON.stringify(selectedEvent));
         
             // Redirect to checkout page
-            window.location.assign("checkout.html");
+            window.location.href = "checkout.html";
         }
+        
         
         
 
